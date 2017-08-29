@@ -22,15 +22,17 @@ then
    eval "$umountlist"
 
    #run the dcfldd command passing the imagefile and device list
-   eval "/usr/bin/dcfldd bs=4M if=/etc/osid/imgroot/$imagefile $devicelist sizeprobe=if statusinterval=1 2>&1 | tee /etc/osid/system/progress.info"
-   
+#   eval "/usr/bin/dcfldd bs=4M if=/etc/osid/imgroot/$imagefile $devicelist sizeprobe=if statusinterval=1 2>&1 | tee /etc/osid/system/progress.info"
+   /usr/bin/dcfldd bs=4M if=/etc/osid/imgroot/$imagefile $devicelist sizeprobe=if statusinterval=1 2>&1 | tee /etc/osid/system/progress.info &
+
+   wait ${!}
    #wait 5 seconds after dcfldd command has finished to ensure php script has a chance to read progress.info
    sleep 5
 
    #empty the contents of the info files ready for the next job
    cat /dev/null > /etc/osid/system/progress.info
    cat /dev/null > /etc/osid/system/imagefile.info
-   cat /dev/null > /etc/osid/system/devicelist.info   
+   cat /dev/null > /etc/osid/system/devicelist.info
    cat /dev/null > /etc/osid/system/umountlist.info
 
    #set the status of the job to zero

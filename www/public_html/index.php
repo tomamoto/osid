@@ -99,7 +99,6 @@ if (isset($_POST['WriteImage'])) {
     }
     
     function stateStartMonitor() {
-        
         if (xmlhttp.readyState==4) {
             
             if (xmlhttp.responseText == 'Error' || xmlhttp.responseText == '') {
@@ -107,11 +106,8 @@ if (isset($_POST['WriteImage'])) {
                 alert("There was problem checking progress");
             
             } else {
-                
                 var writeInfoArray = xmlhttp.responseText.split("|");
-                
                 if (writeInfoArray[2] != 'in' && writeInfoArray[2] != 'out' && writeInfoArray[2] != '' && writeInfoArray[4] == 2) {
-                
                     percentCompleted = parseInt(writeInfoArray[0]);
                     totalFileSize = parseInt(writeInfoArray[1]);
                     fileSizeWritten = parseInt(writeInfoArray[2]);
@@ -157,11 +153,9 @@ if (isset($_POST['WriteImage'])) {
                         document.getElementById('StatusMessage').innerHTML = '<strong>'+fileSizeWritten+'Mb</strong> of <strong>'+totalFileSize+'Mb</strong> written to device(s). <strong>'+timeSeconds+'</strong> '+secondsText+' remaining...';
                         
                     }
-                    
                     waitTime();
                     
                 } else if (writeInfoArray[2] != 'out' && writeInfoArray[4] == 2) {
-                    
                     document.getElementById('progress_bar').style.width = '100%';
                     document.getElementById('progress_bar').style.backgroundColor = '#00CC33';
                     document.getElementById('progress_bar').innerHTML = 'Done...';
@@ -169,13 +163,13 @@ if (isset($_POST['WriteImage'])) {
                     document.getElementById('StatusMessage').innerHTML = 'Completed writing to device(s)';
 
                 } else if (writeInfoArray[4] == 2) {
-                    
                     document.getElementById('StatusMessage').innerHTML = 'Waiting for device(s) to be ready...';
 
                     waitTime();
 
-                }
-            
+		} else {
+		    waitTime();
+		}
             }
         
         }
