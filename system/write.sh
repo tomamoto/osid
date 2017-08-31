@@ -18,6 +18,9 @@ then
    devicelist=$(cat /etc/osid/system/devicelist.info)
    umountlist=$(cat /etc/osid/system/umountlist.info)
    
+   if [[ -z "$devicelist" ]]; then
+	   devicelist='of=/dev/null'
+   fi
    #make sure all devices are unmounted
    eval "$umountlist"
 

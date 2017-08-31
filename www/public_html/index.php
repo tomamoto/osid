@@ -160,7 +160,8 @@ if (isset($_POST['WriteImage'])) {
                     document.getElementById('progress_bar').style.backgroundColor = '#00CC33';
                     document.getElementById('progress_bar').innerHTML = 'Done...';
                     document.getElementById('unprogress_bar').style.width = '0%';
-                    document.getElementById('StatusMessage').innerHTML = 'Completed writing to device(s)';
+		    document.getElementById('StatusMessage').innerHTML = 'Completed writing to device(s)';
+		    document.getElementById('return').style.visibility = 'visible';
 
                 } else if (writeInfoArray[4] == 2) {
                     document.getElementById('StatusMessage').innerHTML = 'Waiting for device(s) to be ready...';
@@ -324,7 +325,8 @@ if (isset($_POST['WriteImage'])) {
             <div id="progress_bar">0%</div><div id="unprogress_bar"></div>
             <p id="StatusMessage" align="center">
                 Connecting to image write sub-system...
-            </p>
+	    </p>
+	    <a class="button" id="return" name="return" href="<?php echo $_SERVER['REQUEST_URI']  ?>">Return</a>
         </div>
     </div>
     <script type="text/javascript">

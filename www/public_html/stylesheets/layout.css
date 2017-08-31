@@ -24,6 +24,12 @@
     background: url(../images/driveicon.png) no-repeat left center;
 }
 
+#return {
+    visibility: hidden;
+    display: table;
+    margin: 0 auto;
+}
+
 #progress_bg {
     position: absolute;
     width: 100%;
